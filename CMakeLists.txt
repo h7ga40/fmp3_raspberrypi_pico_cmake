@@ -1,3 +1,4 @@
+# TOPPERS/FMP3 サンプルアプリ（sample1）
 cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_C_STANDARD 11)
@@ -17,13 +18,13 @@ find_program(CMAKE_OBJCOPY NAMES ${CMAKE_OBJCOPY} ${PICO_TOOLCHAIN_PATH})
 find_program(CMAKE_OBJDUMP NAMES ${CMAKE_OBJDUMP} ${PICO_TOOLCHAIN_PATH})
 find_program(CMAKE_NM NAMES ${CMAKE_NM} ${PICO_TOOLCHAIN_PATH})
 
-project(sample1 C CXX ASM)
+project(sample1 C)
 
-set(FMP3_APP_CFG_FILE ${PROJECT_SOURCE_DIR}/fmp3/sample/sample1.cfg)
-set(FMP3_APP_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/fmp3/sample)
+set(FMP3_APP_CFG_FILE ${FMP3_ROOT_DIR}/sample/sample1.cfg)
+set(FMP3_APP_INCLUDE_DIRS ${FMP3_ROOT_DIR}/sample)
 
 add_executable(sample1
-    ${PROJECT_SOURCE_DIR}/fmp3/sample/sample1.c
+    ${FMP3_ROOT_DIR}/sample/sample1.c
 )
 
 add_subdirectory(fmp3)
@@ -31,7 +32,7 @@ add_subdirectory(fmp3)
 target_link_libraries(sample1 fmp3)
 
 target_include_directories(sample1 PRIVATE
-    ${PROJECT_SOURCE_DIR}/fmp3/sample
+    ${FMP3_ROOT_DIR}/sample
     ${CMAKE_CURRENT_LIST_DIR}
 )
 

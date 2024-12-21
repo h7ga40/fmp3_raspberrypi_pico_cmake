@@ -1,10 +1,7 @@
-# CMakeLists.txt
+# TOPPERS/FMP3 カーネルライブラリ（libfmp3.a）
 cmake_minimum_required(VERSION 3.13)
 
-project(fmp3)
-
-# C言語を使用するプロジェクトであることを宣言
-enable_language(C)
+project(fmp3 C ASM)
 
 list(APPEND FMP3_SYMVAL_TABLES
     ${PROJECT_SOURCE_DIR}/kernel/kernel_sym.def
