@@ -8,5 +8,10 @@
         "PICO_SDK_PATH": "${env:HOME}/.pico-sdk/sdk/2.0.0",
         "PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1",
         "PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.0.0/picotool:${env:HOME}/.pico-sdk/cmake/v3.28.6/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
-    }
+    },
+    "clangd.arguments": [
+        "--compile-commands-dir",
+        "build"
+    ],
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
