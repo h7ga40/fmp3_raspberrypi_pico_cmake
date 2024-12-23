@@ -84,7 +84,6 @@ file(MAKE_DIRECTORY ${CFG1_OUT_DIR})
 add_custom_command(
     OUTPUT ${CFG1_OUT_FILE}
     WORKING_DIRECTORY ${CFG1_OUT_DIR}
-    COMMAND ${CMAKE_COMMAND} -E echo "Generating cfg1_out.c"
     COMMAND ruby ${PROJECT_SOURCE_DIR}/cfg/cfg.rb --pass 1 --kernel fmp ${CFG_INCLUDE_DIRS} ${CFG_API_TABLES} ${CFG_SYMVAL_TABLES} -M ${CFG1_OUT_DIR}/cfg1_out_c.d ${FMP3_CFG_FILES}
     DEPENDS ${PROJECT_SOURCE_DIR}/cfg/cfg.rb ${FMP3_SYMVAL_TABLES} ${CFG_API_TABLE} ${FMP3_CFG_FILES}
     COMMENT "Running cfg pass 1 to generate cfg1_out.c"
@@ -149,7 +148,6 @@ file(MAKE_DIRECTORY ${KERNEL_CFG_DIR})
 add_custom_command(
     OUTPUT ${OFFSET_H_FILE}
     WORKING_DIRECTORY ${CFG1_OUT_DIR}
-    COMMAND ${CMAKE_COMMAND} -E echo "Generating offset.h"
     COMMAND ruby ${PROJECT_SOURCE_DIR}/cfg/cfg.rb --pass 2 -O --kernel fmp ${CFG_INCLUDE_DIRS} ${CFG_CLASS_TRB_FILES} ${CFG_OFFSET_TRB_FILES} --rom-symbol ${CFG1_OUT_SYMS_FILE} --rom-image ${CFG1_OUT_SREC_FILE}
     DEPENDS ${PROJECT_SOURCE_DIR}/cfg/cfg.rb ${FMP3_CLASS_TRB_FILES} ${FMP3_OFFSET_TRB_FILES} ${CFG1_OUT_SYMS_FILE} ${CFG1_OUT_SREC_FILE}
     COMMENT "Running cfg pass 2 to generate offset.h"
@@ -159,7 +157,6 @@ add_custom_command(
 add_custom_command(
     OUTPUT ${KERNEL_CFG_H_FILE} ${KERNEL_CFG_C_FILE} ${CFG2_OUT_DB_FILE}
     WORKING_DIRECTORY ${CFG1_OUT_DIR}
-    COMMAND ${CMAKE_COMMAND} -E echo "Generating kernel_cfg.h kernel_cfg.c"
     COMMAND ruby ${PROJECT_SOURCE_DIR}/cfg/cfg.rb --pass 2 --kernel fmp ${CFG_INCLUDE_DIRS} ${CFG_CLASS_TRB_FILES} ${CFG_KERNEL_CFG_TRB_FILES}
     DEPENDS ${PROJECT_SOURCE_DIR}/cfg/cfg.rb ${OFFSET_H_FILE} ${FMP3_KERNEL_CFG_TRB_FILES}
     COMMENT "Running cfg pass 2 to generate kernel_cfg.h kernel_cfg.c"
@@ -232,7 +229,6 @@ function(fmp3_cfg_check TARGET)
     )
     add_custom_command(TARGET ${TARGET} POST_BUILD
         WORKING_DIRECTORY ${FMP3_KERNEL_CFG_DIR}
-        COMMAND ${CMAKE_COMMAND} -E echo "Running cfg pass 3 to check configuration"
         COMMAND ruby ${FMP3_PASS3_ARGS} --rom-symbol ${TARGET}.syms --rom-image ${TARGET}.srec
         DEPENDS ${TARGET}.syms ${TARGET}.srec
         COMMENT "Running cfg pass 3 to check configuration"
