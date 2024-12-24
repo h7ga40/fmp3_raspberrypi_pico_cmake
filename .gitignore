@@ -13,3 +13,4 @@ CMakeUserPresets.json
 
 build/
 .cache/
+!fmp3/sample/Makefile
