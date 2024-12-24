@@ -133,7 +133,7 @@ ALABEL(core_exc_entry_2)
 	 */
 	mrs    r3, ipsr
 	lsls   r3, #2
-	my_exc_tbl r1, r2 /* r1 = p_exc_tbl[get_my_prcidx() */
+	my_exc_tbl r1, r2 /* r1 = p_exc_tbl[get_my_prcidx()] */
 	ldr    r2, [r1, r3]
 	/* 引数 p_excinf は r0 に設定されている */
 	blx    r2
